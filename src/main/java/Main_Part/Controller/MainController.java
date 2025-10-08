@@ -1,37 +1,85 @@
 package Main_Part.Controller;
 
+import Main_Part.View.MainMenu;
+import Main_Part.View.SettingsMenu;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 
 public class MainController extends Controller {
-    public static StackPane canvasStack;
-
+    private StackPane canvasStack;
     private Canvas canvas;
-    private BorderPane uiPane;
+    private StackPane uiLayer;
+    private Group root;
 
-    public MainController(Canvas canvas) {
+    // all views
+    private MainMenu mainMenu;
+    private SettingsMenu settingsMenu;
+
+    // all controllers
+    private SettingsController settingsController;
+
+    public MainController(Canvas canvas, Group root) {
         super(canvas);
         this.canvas = canvas;
-        uiPane = new BorderPane(canvas);
-        uiPane.setId("uiPane");
-        canvasStack = new StackPane();
+        this.canvasStack = new StackPane();
+        this.uiLayer = new StackPane();
+
+        uiLayer.setAlignment(Pos.CENTER);
+        canvasStack.setPrefSize(canvas.getWidth(), canvas.getHeight());
+        canvasStack.getChildren().addAll(canvas, uiLayer);
+        canvasStack.setAlignment(Pos.CENTER);
+        canvas.setMouseTransparent(true);
+
+        this.root = root;
+
+        settingsController = new SettingsController(canvas);
+        settingsMenu = new SettingsMenu(settingsController, this, root);
+
+        mainMenu = new MainMenu(this, root);
+
+        placeCanvas(root);
+        setUIContent(mainMenu);
     }
 
     public void placeCanvas(Group root) {
-        StackPane.setAlignment(getCanvas(), Pos.CENTER);
+        if (!root.getChildren().contains(canvasStack)) {
+            root.getChildren().add(canvasStack);
+        }
+    }
 
-        getCanvas().setMouseTransparent(true);
+    public void pageRedirection(int i) {
+        switch (i) {
+            case 0:
+                uiLayer.getChildren().clear();
+                break;
+            case 1:
+                uiLayer.getChildren().clear();
+                break;
+            case 2:
+                setUIContent(settingsMenu);
+                break;
+            case 3:
+                setUIContent(mainMenu);
+                break;
+            default:
+                break;
+        }
+    }
 
-        canvasStack.getChildren().clear();
-        canvasStack.getChildren().addAll(getCanvas(), uiPane);
-
-        root.getChildren().add(canvasStack);
+    public void setUIContent(javafx.scene.Node content) {
+        uiLayer.getChildren().clear();
+        if (content != null) {
+            uiLayer.getChildren().add(content);
+        }
     }
 
     public Canvas getCanvas() {
         return canvas;
+    }
+
+    public StackPane getUiLayer() {
+        return uiLayer;
     }
 }

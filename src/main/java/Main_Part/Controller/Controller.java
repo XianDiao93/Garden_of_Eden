@@ -1,5 +1,6 @@
 package Main_Part.Controller;
 
+import javafx.scene.Group;
 import javafx.scene.canvas.Canvas;
 
 public abstract class Controller {

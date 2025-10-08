@@ -2,6 +2,7 @@ package Main_Part.View;
 
 import Main_Part.Controller.Controller;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.layout.Pane;
 
@@ -9,16 +10,16 @@ public abstract class UI extends Pane {
     private Canvas canvas;
     Controller controller;
 
-    public UI(Controller controller) {
+    public UI(Controller controller, Group root) {
         this.controller = controller;
         this.canvas = controller.getCanvas();
         setPickOnBounds(false);
     }
 
     /**
-     * Creates the UI for the game.
+     * set layout of pages
      */
-    public abstract void create();
+    public abstract void setLayout();
 
     /**
      * Places the canvas in the designated root.
@@ -60,4 +61,15 @@ public abstract class UI extends Pane {
      * clean up
      */
     public abstract void cleanUp();
+
+
+    /**
+     *  update sprites
+     */
+    public abstract void updateSprites();
+
+    /**
+     * get the root
+     */
+    public abstract Node getView();
 }
