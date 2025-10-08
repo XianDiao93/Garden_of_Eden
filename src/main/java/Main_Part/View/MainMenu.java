@@ -120,11 +120,6 @@ public class MainMenu extends UI {
     }
 
     @Override
-    public Node getView() {
-        return root;
-    }
-
-    @Override
     public Node getStyleableNode() {
         return super.getStyleableNode();
     }

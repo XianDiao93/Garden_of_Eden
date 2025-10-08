@@ -67,9 +67,4 @@ public abstract class UI extends Pane {
      *  update sprites
      */
     public abstract void updateSprites();
-
-    /**
-     * get the root
-     */
-    public abstract Node getView();
 }

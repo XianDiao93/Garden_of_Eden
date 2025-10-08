@@ -9,7 +9,6 @@ import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -109,10 +108,6 @@ public class SettingsMenu extends UI{
     @Override
     public void updateSprites() {
 
-    }
-
-    public Node getView() {
-        return root;
     }
 
     @Override
